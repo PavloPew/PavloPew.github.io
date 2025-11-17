@@ -11,6 +11,92 @@ html, body {
     -ms-overflow-style: none;
 }
 
+.about-section {
+    width: 100%;
+    /* same full-height behaviour so it snaps like your other sections */
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: #fff;
+    box-sizing: border-box;
+    position: relative; /* added for arrow positioning */
+}
+
+.about-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.about-left {
+    flex: 1 1 200px;
+    z-index: 40;
+}
+
+.about-right {
+    flex: 1 1 400px;
+}
+
+.about-right p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.about-cards {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.about-card {
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    z-index: 40;
+}
+
+.about-card:hover {
+    background-color: rgba(255,255,255,0.04);
+}
+
+.about-card .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.about-card .card-text {
+    color: #CFCFCF;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+.card-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;   /* space between icon and text — adjust as you like */
+    object-fit: contain;   /* ensures the png is fitted nicely */
+}
+
+/* Responsive behaviour */
+@media (max-width: 800px) {
+    .about-container {
+        flex-direction: column;
+    }
+}
+
 .hero-container,
 .work-section {
     height: 100vh;
