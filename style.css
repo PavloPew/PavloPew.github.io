@@ -147,30 +147,30 @@ html::-webkit-scrollbar {
 }
 
 .about-container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;        /* allow wrapping on small screens */
     gap: 40px;
-    flex-wrap: wrap;
-    z-index: 40;
 }
 
 .about-left {
-    flex: 1 1 300px;
-}
-
-.about-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    border-radius: 8px;
-    z-index: 40;
+    /* Make left column a flex item that scales proportionally */
+    flex: 1 1 20%;           /* grow & shrink, initial size ~40% */
+    min-width: 300px;        /* stops it from becoming too narrow */
 }
 
 .about-right {
-    flex: 1 1 400px;
+    flex: 1 1 55%;           /* right column takes the rest ~55% */
+    min-width: 300px;
+}
+
+.about-img {
+    width: 100%;             /* full width of its container */
+    height: auto;            /* maintain aspect ratio */
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .section-title {
@@ -324,5 +324,16 @@ html::-webkit-scrollbar {
 
     .hero-content .description {
         margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .about-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .about-left, .about-right {
+        flex: 1 1 100%;
+        min-width: 0;
     }
 }
