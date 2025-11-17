@@ -166,7 +166,7 @@ html::-webkit-scrollbar {
 }
 
 .about-img {
-    width: 100%;             /* full width of its container */
+    width: 90%;             /* full width of its container */
     height: auto;            /* maintain aspect ratio */
     display: block;
     object-fit: cover;
