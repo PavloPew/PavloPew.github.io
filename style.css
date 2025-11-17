@@ -174,7 +174,7 @@ html::-webkit-scrollbar {
 }
 
 .section-title {
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(1.5rem, 2.5vw, 4rem);
     margin-bottom: 20px;
     color: #fff;
 }
@@ -194,7 +194,7 @@ html::-webkit-scrollbar {
 }
 
 .about-card {
-    padding: 20px;
+    padding: 10px;
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 8px;
     transition: background-color 0.3s ease;
@@ -207,7 +207,7 @@ html::-webkit-scrollbar {
 .card-title {
     display: flex;
     align-items: center;
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    font-size: clamp(1.2rem, 2vw, 1.3rem);
     font-weight: 600;
     color: #fff;
     margin-bottom: 6px;
