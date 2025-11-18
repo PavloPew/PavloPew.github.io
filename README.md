@@ -1,4 +1,4 @@
 ### Pavlo Puzik ###
 
 Check out my portfolio!
-https://pavlopew.github.io/
+https://pavlopew.github.io
