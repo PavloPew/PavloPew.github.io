@@ -1,10 +1,10 @@
 (function() {
     const numStars        = 150;
     const minSize         = 5;   // px
-    const maxSize         = 7;   // px
+    const maxSize         = 8;   // px
 
-    const minTwinkle      = 0.8;  // seconds
-    const maxTwinkle      = 3.5;  // seconds
+    const minTwinkle      = 5;  // seconds
+    const maxTwinkle      = 7;  // seconds
 
 
     function random(min, max) {
@@ -12,10 +12,10 @@
     }
 
     function getRandomPxX() {
-        return random(0, window.innerWidth);
+        return random(0, window.innerWidth-10);
     }
     function getRandomPxY() {
-        return random(0, window.innerHeight);
+        return random(0, window.innerHeight-10);
     }
 
     function easeLog(t) {

@@ -1,15 +1,13 @@
-/* Base & Layout */
-html, body {
+html,body{
     margin: 0;
     padding: 0;
+    background-color: black;
     width: 100%;
     height: 100%;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overscroll-behavior-y: none;
-    background-color: #000;
     box-sizing: border-box;
+    scroll-snap-type: y mandatory;
 }
 
 *, *::before, *::after {
@@ -20,79 +18,71 @@ html::-webkit-scrollbar {
     display: none;
 }
 
-/* Sections */
-.hero-container,
-.about-section,
-.work-section {
-    width: 100%;
-    min-height: 100vh;
-    scroll-snap-align: start;
-    position: relative;
-}
-
-/* Hero Section */
-.hero-container {
+.intro-container {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    min-height: 97vh; /* 1vh = 1% view height*/
+    width: 100%;
+    position:relative;
+    scroll-snap-align: start;
+    z-index: 50;
 }
 
-.hero-content {
+.intro-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; /* main axis is vertical */
+    align-items: center; /* cross-axis is horizontal */
     text-align: center;
-    padding: 0 20px;
 }
 
 .hello {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
     color: #4EA8FF;
+    /* 1rem = 16px, vw = 1% of viewport width */
+    font-size: clamp(0.9rem, 2vw, 1.1rem); /* clamps a middle value */
     margin-bottom: 0.5rem;
 }
 
-.hero-content h1 {
+.intro-content h1 {
     font-size: clamp(2.5rem, 5vw, 5rem);
+    color: white;
     margin: 0;
-    line-height: 1.1;
-    color:white;
+    line-height: clamp(4.5rem, 5vw, 6rem);
+}
+
+.inTouch {
+    background-color: #2563EB;
+    color: #ccc;
+    font-size: clamp(0.75rem, 1vw, 1.25rem);
+    padding: clamp(0.75rem, 0.85vw, 0.9rem);
+
 }
 
 .tagline {
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     margin: 0.5rem 0 1rem 0;
-    color: #ccc;
+    color: #aaa;
 }
 
 .description {
     font-size: clamp(0.9rem, 2vw, 1.1rem);
-    max-width: 700px;
+    width: 700px;
     margin: 0 auto 2rem auto;
-    color: #aaa;
+    color: #aaa
 }
 
-.cta-buttons {
-    margin-bottom: 2rem;
-}
-
-.btn {
+.inTouch-butt {
     padding: 12px 24px;
     font-size: clamp(0.9rem, 2vw, 1rem);
     text-decoration: none;
     border-radius: 4px;
-    margin: 0 8px;
     display: inline-block;
-}
+    color: white;
+    background-color: #2563EB;
+    margin-bottom: 2rem;
+    z-index: 30;
 
-.btn.primary {
-    background: #2563EB;
-    color: #fff;
-}
-
-.btn.secondary {
-    background: rgba(255,255,255,0.8);
-    color: #000;
 }
 
 .social-icons {
@@ -104,30 +94,61 @@ html::-webkit-scrollbar {
 
 .icon-link {
     display: inline-block;
-    width: clamp(24px, 4vw, 32px);  /* icon width scales */
-    height: clamp(24px, 4vw, 32px); /* icon height scales */
+    width: clamp(25px,4vw, 32px);
+    height: clamp(25px,4vw, 32px);
     margin: 0 clamp(4px, 1vw, 8px);
-    color: #aaa;
-    transition: color 0.3s ease;
 }
 
 .icon-link img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    z-index: 30;
 }
-
 
 .icon-link:hover {
-    color: #fff;
+    transform: scale(1.15);
 }
 
-.arrow-icon {
-    width: 32px;
-    height: 32px;
+.star {
+    position: absolute; /* keeps content in place */
+    background: white;
+    opacity: 0.7;
+    /* Transforms into star*/
+    will-change: opacity, transform, left, top;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%,
+    79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8),
+                0 0 4px rgba(255, 255, 255, 0.6),
+                0 0 4px rgba(255, 255, 255, 0.4);
+    z-index:0;
 }
 
-.scroll-arrow {
+/* Controlled by minTwinkle and maxTwinkle */
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.2);}
+    50% { opacity: 0.9; transform: scale(1);}
+}
+
+.milky-way {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    transform: translate(-50%, -50%) rotate(20deg);
+    width: 100%;
+    height: 300px;
+    background: radial-gradient(
+            ellipse farthest-side at center,
+            rgba(255,255,255,0.4),
+            rgba(255,255,255,0.1) 70%,
+            transparent
+    );
+    filter: blur(30px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.arrow{
     position: absolute;
     left: 50%;
     bottom: 20px;
@@ -136,66 +157,74 @@ html::-webkit-scrollbar {
     cursor: pointer;
     animation: bob 2s infinite ease-in-out;
     z-index: 30;
+    width: 32px;
+    height: 32px;
 }
 
-/* About Section */
-.about-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
+@keyframes bob {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
 }
 
 .about-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;        /* allow wrapping on small screens */
-    gap: 40px;
-    z-index: 40;
+    align-items: center;
+    min-height: 97vh; /* 1vh = 1% view height*/
+    position:relative;
+    scroll-snap-align: start;
+    z-index: 50;
+}
+
+
+.about-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
+    flex-wrap: wrap;
 }
 
 .about-left {
-    /* Make left column a flex item that scales proportionally */
-    flex: 1 1 8%;           /* grow & shrink, initial size ~40% */
-    min-width: 300px;        /* stops it from becoming too narrow */
-}
-
-.about-right {
-    flex: 1 1 40%;           /* right column takes the rest ~55% */
+    flex: 1 1 10%;
     min-width: 300px;
 }
 
-.about-img {
-    width: 100%;             /* full width of its container */
-    height: auto;            /* maintain aspect ratio */
-    display: block;
-    object-fit: cover;
-    border-radius: 8px;
-    z-index: 40;
+.about-right {
+    flex: 1 1 40%;
+    min-width: 300px;
 }
 
 .section-title {
     font-size: clamp(1.5rem, 2.5vw, 4rem);
-    margin-bottom: 20px;
     color: #fff;
 }
 
 .about-right p {
     font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-    line-height: 1.6;
+
     color: #aaa;
-    margin-bottom: 20px;
 }
 
-.about-cards {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.about-img {
+    width: clamp(30rem, 30vw, 30rem);
+    height: clamp(35rem, 37.5vw, 40rem);
+    display: block;
+    object-fit: scale-down;
+    border-radius: 8px;
 }
 
 .about-card {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: clamp(30rem, 50vw, 60rem);
+    min-height: clamp(5rem, 6vw, 6rem);
+    gap: 8px;
     padding: 10px;
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 8px;
@@ -203,7 +232,7 @@ html::-webkit-scrollbar {
 }
 
 .about-card:hover {
-    background-color: rgba(255,255,255,0.04);
+    background-color: rgba(37, 99, 235, 0.4);
 }
 
 .card-title {
@@ -212,7 +241,7 @@ html::-webkit-scrollbar {
     font-size: clamp(1.2rem, 2vw, 1.3rem);
     font-weight: 600;
     color: #fff;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
 }
 
 .card-icon {
@@ -225,108 +254,8 @@ html::-webkit-scrollbar {
 .card-text {
     color: #CFCFCF;
     font-size: clamp(0.85rem, 1.9vw, 1.0rem);
-    line-height: 1.4;
-}
-
-/* Arrow specific for about section */
-.about-arrow {
-    position: absolute;
-    left: 50%;
-    bottom: 20px;
-    transform: translateX(-50%);
-    color: #ccc;
-    cursor: pointer;
-    animation: bob 2s infinite ease-in-out;
-    z-index: 30;
-}
-
-/* Work Section */
-.work-section h1 {
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    margin: 0;
-    text-align: center;
-    color: #fff;
-    padding: 60px 20px;
-}
-
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    opacity: 0;
-    will-change: opacity, transform, left, top;
-    clip-path: polygon(
-            50% 0%, 61% 35%, 98% 35%, 68% 57%,
-            79% 91%, 50% 70%, 21% 91%, 32% 57%,
-            2% 35%, 39% 35%
-    );
-    box-shadow:
-            0 0 4px rgba(255,255,255,0.8),
-            0 0 8px rgba(255,255,255,0.6),
-            0 0 12px rgba(255,255,255,0.4);
-    z-index: 10;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0; transform: scale(0.2); }
-    50%      { opacity: 0.9; transform: scale(1); }
-}
-
-/* Background / Effects */
-.milky-way {
-    position: absolute;
-    left: 40%;
-    top: 30%;
-    transform: translate(-50%, -50%) rotate(20deg);
-    width: 100%;
-    height: 300px;
-    background: radial-gradient(
-            ellipse farthest-side at center,
-            rgba(255,255,255,0.35),
-            rgba(255,255,255,0.05) 70%,
-            transparent
-    );
-    filter: blur(30px);
-    opacity: 0.5;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Animations */
-@keyframes bob {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-}
-
-/* Responsive tweaks */
-@media (max-width: 900px) {
-    .about-container {
-        gap: 20px;
-    }
-}
-
-@media (max-width: 600px) {
-    .cta-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        align-items: center;
-    }
-
-    .btn {
-        width: calc(100% - 40px);
-        margin: 0 auto 8px auto;
-        text-align: center;
-    }
-
-    .hero-content .description {
-        margin-bottom: 1.5rem;
-    }
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 @media (max-width: 700px) {
@@ -338,4 +267,108 @@ html::-webkit-scrollbar {
         flex: 1 1 100%;
         min-width: 0;
     }
+}
+
+.skills-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 97vh; /* 1vh = 1% view height*/
+    position:relative;
+    scroll-snap-align: start;
+    z-index: 50;
+
+}
+
+
+.skills-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
+    flex-wrap: wrap;
+    margin-left: 70px;
+    max-width: 200px;
+}
+
+.skills-card {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    width: auto;
+    min-height: auto;
+    gap: 8px;
+    padding: 10px;
+    border: 5px solid rgba(37, 99, 235, 0.6);
+    border-radius: 8px;
+    background-color: black;
+}
+
+.skills-title {
+    font-size: clamp(1.5rem, 2.5vw, 4rem);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skills-card-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: clamp(1.2rem, 2vw, 1.3rem);
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+.skills-card-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+.milky-way-two {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    transform: translate(10%, 20%) rotate(-20deg);
+    width: 50%;
+    height: 300px;
+    background: radial-gradient(
+            ellipse farthest-side at center,
+            rgba(255, 165, 0 ,0.4),
+            rgba(255,255,255,0.1) 70%,
+            transparent
+    );
+    filter: blur(30px);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 97vh; /* 1vh = 1% view height*/
+    position:relative;
+    scroll-snap-align: start;
+    z-index: 50;
+}
+
+.projects-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3rem);
+    flex-wrap: wrap;
+}
+
+.project-title {
+    color: white;
+    font-size: clamp(6rem, 6vw, 6rem);
 }
