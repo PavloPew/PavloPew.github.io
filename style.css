@@ -89,7 +89,7 @@ html::-webkit-scrollbar {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(8px, 2vw, 16px)
+    gap: clamp(8px, 2vw, 16px); /* spacing between icons */
 }
 
 .icon-link {
